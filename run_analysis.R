@@ -43,8 +43,9 @@ rm(subject,y,x)
 rawData <- rbind(rawData, 1:563)
 
 # Create vector showing which variables contain "mean.." - which replaced
-#  "mean()" by make.names() and "std.." which replaced "std()"
-data <- select(rawData, contains("mean.."), contains("std.."),subject, activity)
+#  "mean()" by make.names() and "std.." which replaced "std()". Exclude angles
+#  means, which are out of scope for our consideration.
+data <- select(rawData, contains("mean.."), contains("std.."), -contains("angle"), subject, activity)
 
 # Now, we can reorder our data to its original order using our index row.
 data <- data[,order(data[10300,])]
